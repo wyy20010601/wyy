@@ -3,6 +3,7 @@
 #define BOOK_MANAGEMENT_GUARD__H
 
 #include <stdio.h>
+#include "loan.h"
 
 /*You can extend the structs (Book and BookArray) defined in this head file;
   However, you may not change the function prototypes.
@@ -16,6 +17,7 @@ typedef struct _Book {
 		char *authors; //comma separated list of authors
 		unsigned int year; // year of publication
 		unsigned int copies; //number of copies the library has
+		unsigned int borrowed;  //number of books borrowed by users
 }Book;
 
 typedef struct _BookArray {
@@ -23,7 +25,7 @@ typedef struct _BookArray {
 	 unsigned int length; // number of elements in the (Book*) array
 }BookArray;
 
-const int max_length = 1 << 10;
+
 //saves the database of books in the specified file
 //returns 0 if books were stored correctly, or an error code otherwise
 int store_books(FILE *file);
@@ -59,6 +61,8 @@ BookArray find_book_by_author (const char *author);
 //array is the null pointer.
 BookArray find_book_by_year (unsigned int year);
 
+Book loan_to_book(Loan);
 
+void print();
 #endif
 

@@ -1,12 +1,13 @@
 #ifndef __USER__H
 #define __USER__H
-
+#include <stdio.h>
 
 typedef struct _User {
     char *name;
     char *username;
     char *password;
-    _User *nxt;
+    int is_manager;
+    //_User *nxt;
 }User, *User_p;
 
 typedef struct _UserArray {
@@ -14,17 +15,22 @@ typedef struct _UserArray {
 	 unsigned int length;
 }UserArray;
 
-//user register
-const char *user_file = "user_message.dat";
-struct User *user_register(struct User u);
-struct User *login(char *username, *password);
+static UserArray user_array;
+static int user_array_size = 0;
 
-int store_users(File *file);
 
-int load_users(File *file);
+int add_user(User user);
 
-int user_register(User user);
+int store_users(FILE *file);
+
+int load_users(FILE *file);
+
+int have_user(const char *username);
 
 UserArray find_user_by_username(const char *username);
+
+int clean_user_array(UserArray ua);
+UserArray find_user_by_username(const char *username) ;
+void print_user_array(UserArray user_array);
 
 #endif
